@@ -4,8 +4,8 @@ POST http://localhost:3001/project
 Content-Type: application/json
 
 {
-  "title": "Test 2",
-  "description": "Description 2",
+  "title": "Test",
+  "description": "Description",
   "image": "image-url",
   "sourceCode": "code-url"
 }
@@ -20,14 +20,14 @@ GET http://localhost:3001/project/ffefcf8e-3934-4bbd-9ab7-46288c598788
 
 ### Update complete or partially a project
 
-PATCH http://localhost:3001/project/83054834-926b-4882-ab83-a56912b77479
+PATCH http://localhost:3001/project/
 Content-Type: application/json
 
 {
-  "title": "Test 3",
-  "description": "Description 3"
+  "title": "Test 4",
+  "description": "Description 4"
 }
 
 ### Destroy a unique project
 
-DELETE  http://localhost:3001/project/ffefcf8e-3934-4bbd-9ab7-46288c598788
+DELETE  http://localhost:3001/project/83054834-926b-4882-ab83-a56912b77479
