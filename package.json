@@ -1,0 +1,20 @@
+{
+  "name": "portfolio-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch src/http/server.ts"
+  },
+  "keywords": [],
+  "author": "Alan Souza",
+  "license": "ISC",
+  "description": "My Portfolio API in Next.js",
+  "devDependencies": {
+    "@types/node": "^22.13.9",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "fastify": "^5.2.1"
+  }
+}
