@@ -1,17 +1,23 @@
-import { z } from "zod";
+import { z } from 'zod';
 
-export const paramId = z.object({ id: z.string().uuid() });
+export const paramId = z.object({ id: z.number() });
 
 export const bodyCreate = z.object({
-  title: z.string(),
-  description: z.string(),
+  challenges: z.string().array(),
+  description: z.string().array(),
   image: z.string(),
-  sourceCode: z.string(),
+  integration: z.string().array(),
+  libraries: z.string().array(),
+  technologies: z.string().array(),
+  title: z.string(),
 });
 
 export const bodyUpdate = z.object({
-  title: z.optional(z.string()),
-  description: z.optional(z.string()),
+  challenges: z.optional(z.string().array()),
+  description: z.optional(z.string().array()),
   image: z.optional(z.string()),
-  sourceCode: z.optional(z.string()),
+  integration: z.optional(z.string().array()),
+  libraries: z.optional(z.string().array()),
+  technologies: z.optional(z.string().array()),
+  title: z.optional(z.string()),
 });

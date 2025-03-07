@@ -3,15 +3,21 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "build": "tsup src/server.ts",
+    "start": "node dist/server.js",
     "dev": "tsx watch src/server.ts"
   },
   "keywords": [],
+  "engines": {
+    "node": ">=20"
+  },
   "author": "Alan Souza",
   "license": "ISC",
-  "description": "My Portfolio API in Next.js",
+  "description": "My Portfolio API to Next.js pages",
   "devDependencies": {
     "@types/node": "^22.13.9",
     "prisma": "^6.4.1",
+    "tsup": "^8.4.0",
     "tsx": "^4.19.3",
     "typescript": "^5.8.2"
   },

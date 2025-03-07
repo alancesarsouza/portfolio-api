@@ -1,33 +1,29 @@
 ### Create a new project
 
-POST http://localhost:3001/project
+POST http://localhost:3333/api/v1/projects
 Content-Type: application/json
 
 {
-  "title": "Test",
-  "description": "Description",
-  "image": "image-url",
-  "sourceCode": "code-url"
 }
 
 ### List all projects
 
-GET http://localhost:3001/project
+GET http://localhost:3333/api/v1/projects
 
 ### Show a unique project
 
-GET http://localhost:3001/project/ffefcf8e-3934-4bbd-9ab7-46288c598788
+GET http://localhost:3333/api/v1/projects/1
 
 ### Update complete or partially a project
 
-PATCH http://localhost:3001/project/
+PATCH http://localhost:3333/api/v1/projects/1
 Content-Type: application/json
 
 {
-  "title": "Test 4",
-  "description": "Description 4"
+  "title": "Test",
+  "description": "Test"
 }
 
 ### Destroy a unique project
 
-DELETE  http://localhost:3001/project/83054834-926b-4882-ab83-a56912b77479
+DELETE  http://localhost:3333/api/v1/projects/1
