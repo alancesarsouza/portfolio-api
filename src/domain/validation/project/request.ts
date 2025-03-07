@@ -1,6 +1,8 @@
 import { z } from 'zod';
 
-export const paramId = z.object({ id: z.number() });
+export const paramId = z.object({
+  id: z.string().transform((val) => parseInt(val, 10)),
+});
 
 export const bodyCreate = z.object({
   challenges: z.string().array(),
