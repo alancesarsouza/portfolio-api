@@ -1,7 +1,11 @@
+import { SkillType } from './skill.interface';
+
 export type ProjectType = {
   id: number;
   createdAt: Date;
   updatedAt: Date;
+
+  published: boolean;
 
   image: string;
   title: string;
@@ -11,6 +15,8 @@ export type ProjectType = {
   integration: string[];
   libraries: string[];
   technologies: string[];
+
+  skills?: SkillType<ProjectType>[];
 };
 
 export type ProjectNonCreatedType = Omit<

@@ -7,41 +7,63 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Project {
-  id          Int @id @default(autoincrement())
-  createdAt              DateTime            @default(now())
-  updatedAt              DateTime            @updatedAt
+model Skill {
+  id    Int    @id @default(autoincrement())
 
+  projectId Int 
+  project   Project @relation(fields: [projectId], references: [id]) 
+
+  importance Int @default(0)
+  label  String[]
+  description  String[]
+}
+
+model Project {
+  id          Int        @id @default(autoincrement())
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  published   Boolean    @default(false)
   image       String
   title       String
 
   description String[] 
-  challenges String[] 
+  challenges  String[] 
   technologies String[] 
-  libraries String[] 
+  libraries   String[] 
   integration String[] 
+
+  // comments    Comment[] 
+  skills      Skill[]
 }
 
 // model User {
-//   id        String @id @default(uuid()) @db.Uuid
-//   createdAt              DateTime            @default(now())
-//   updatedAt              DateTime            @updatedAt
-//   email     String @unique
-//   firstName String
-//   lastName  String
+//   id      String   @id @default(uuid()) @db.Uuid
+//   createdAt   DateTime   @default(now())
+//   updatedAt   DateTime   @updatedAt
+
+//   email   String   @unique
+//   name    String
+//   role    String
+//   companyName String
+//   linkedIdUrl String
+
+//   // comments Comment[] 
 // }
 
-// model Post {
-//   id        Int     @id 
-//   title     String
-//   published Boolean @default(true)
-//   author    User    @relation(fields: [authorId], references: [id])
-//   authorId  Int
+
+// model Comment {
+//   projectId Int 
+//   project   Project @relation(fields: [projectId], references: [id]) 
+
+//   userId    String 
+//   user      User    @relation(fields: [userId], references: [id]) 
+
+//   @@id([userId, projectId]) 
+
+//   updatedAt   DateTime   @updatedAt
+
+//   text String
+
 // }
 
-// model Profile {
-//   id        Int    @id 
-//   biography String
-//   user      User   @relation(fields: [userId], references: [id])
-//   userId    Int    @unique
-// }

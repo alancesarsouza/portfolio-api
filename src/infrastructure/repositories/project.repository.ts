@@ -19,17 +19,20 @@ export class ProjectRepository {
   async list(): Promise<ProjectListInterface[]> {
     if (!cache.length) {
       cache = await this.db.findMany({
+        where: { published: true },
         select: {
           id: true,
+          description: true,
+          image: true,
+          title: true,
           createdAt: false,
           updatedAt: false,
-          description: true,
+          published: false,
           challenges: false,
           technologies: false,
           libraries: false,
           integration: false,
-          image: true,
-          title: true,
+          skills: false,
         },
       });
     }
@@ -38,12 +41,27 @@ export class ProjectRepository {
   }
 
   async show(id: ProjectType['id']): Promise<ProjectDetailInterface | null> {
-    return this.db.findUnique({ where: { id } });
+    return this.db.findUnique({
+      where: { id },
+      include: {
+        skills: {
+          select: { label: true, description: true, importance: true },
+          orderBy: { importance: 'desc' },
+        },
+      },
+    });
   }
 
   async save(data: ProjectNonCreatedType): Promise<ProjectDetailInterface> {
     cache = [];
-    return this.db.create({ data });
+    const { skills, ...project } = data;
+
+    return this.db.create({
+      data: {
+        ...project,
+        skills: { create: skills },
+      },
+    });
   }
 
   async change(
@@ -51,13 +69,25 @@ export class ProjectRepository {
     data: ProjectDetailInterface
   ): Promise<ProjectDetailInterface> {
     cache = [];
+
+    const { skills, ...project } = data;
+
     return this.db.update({
       where: { id },
-      data,
+      data: {
+        ...project,
+        skills: {
+          deleteMany: { projectId: id },
+          create: skills?.filter((skill) => ({
+            label: skill.label,
+            description: skill.description,
+          })),
+        },
+      },
     });
   }
 
-  async destroy(id: ProjectType['id']): Promise<ProjectDetailInterface> {
+  async destroy(id: ProjectType['id']) {
     return this.db.delete({ where: { id } });
   }
 }

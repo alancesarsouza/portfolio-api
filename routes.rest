@@ -3,8 +3,7 @@
 POST http://localhost:3333/api/v1/projects
 Content-Type: application/json
 
-{
-}
+{}
 
 ### List all projects
 
@@ -12,18 +11,23 @@ GET http://localhost:3333/api/v1/projects
 
 ### Show a unique project
 
-GET http://localhost:3333/api/v1/projects/1
+GET http://localhost:3333/api/v1/projects/9
 
 ### Update complete or partially a project
 
-PATCH http://localhost:3333/api/v1/projects/1
+PATCH http://localhost:3333/api/v1/projects/9
 Content-Type: application/json
 
 {
   "title": "Test",
-  "description": "Test"
+  "skills": [
+    {"importance": 1, "label": ["React", "React"], "description": ["Avancado", "Advanced"] },
+    {"importance": 11, "label": ["React2", "React2"], "description": ["Avancado2", "Advanced2"] },
+    {"importance": 3, "label": ["React3", "React3"], "description": ["Avancado3", "Advanced3"] },
+    {"importance": 3, "label": ["React3", "React3"], "description": ["Avancado3", "Advanced3"] }
+  ]
 }
 
 ### Destroy a unique project
 
-DELETE  http://localhost:3333/api/v1/projects/1
+DELETE  http://localhost:3333/api/v1/projects/6

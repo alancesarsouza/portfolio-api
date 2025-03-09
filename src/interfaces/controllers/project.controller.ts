@@ -5,6 +5,7 @@ import {
   bodyUpdate,
 } from '../../domain/validation/project/request';
 import { ProjectRepository } from '../../infrastructure/repositories/project.repository';
+import { ProjectNonCreatedType } from '../../domain/interface/project.interface';
 
 const repository = new ProjectRepository();
 
@@ -43,15 +44,19 @@ export async function projectRoutes(app: FastifyInstance) {
 
     const payload = bodyUpdate.parse(request.body);
 
-    const data = await repository.change(id, { ...found, ...payload });
+    const data = await repository.change(id, {
+      ...found,
+      ...payload,
+      skills: payload?.skills || [],
+    });
 
     return reply.status(201).send({ data });
   });
 
   app.delete('/api/v1/projects/:id', async (request, reply) => {
     const { id } = paramId.parse(request.params);
-    const data = await repository.destroy(id);
+    await repository.destroy(id);
 
-    return reply.status(201).send({ data });
+    return reply.status(201).send();
   });
 }
